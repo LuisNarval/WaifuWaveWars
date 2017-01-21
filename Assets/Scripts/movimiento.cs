@@ -9,6 +9,8 @@ public class movimiento : MonoBehaviour {
 
 	public int estado=1;
 
+
+
 	// Use this for initialization
 	void Start () {
 		

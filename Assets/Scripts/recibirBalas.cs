@@ -14,6 +14,8 @@ public class recibirBalas : MonoBehaviour {
 	public GameObject explosion;
 
 
+	public bool respawnActivo = false;
+
 	int vidas=3;
 	int cantidadDeBalas=0;
 
@@ -31,19 +33,32 @@ public class recibirBalas : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D invasor){
 		print ("Ha habido Contacto");
 
-		if (invasor.gameObject.tag== colorPersonaje) {
-			Destroy (invasor.gameObject);
-			cantidadDeBalas++;
-			actualizarMarcador ();
 
-		} else if(invasor.gameObject.tag!="jugador") {
-			Destroy (this.gameObject);
-			Instantiate (explosion, this.transform.position, this.transform.rotation);
-			vidas--;
-			actualizarVidas();
+			if (invasor.gameObject.tag== colorPersonaje) {
+				Destroy (invasor.gameObject);
+				cantidadDeBalas++;
+				actualizarMarcador ();
+
+			} else if(invasor.gameObject.tag!="jugador"&&!respawnActivo) {
+				
+
+				Instantiate (explosion, this.transform.position, this.transform.rotation);
+				this.transform.position = new Vector3 (1000, this.transform.position.y, 200);
+
+				vidas--;
+				actualizarVidas();
+				respawnActivo = true;
+				this.GetComponent<respawn> ().enabled = true;
 		}
+				
+
+		
+
+
 
 	}
+
+
 
 	void actualizarMarcador(){
 		if (cantidadDeBalas < 10) {
