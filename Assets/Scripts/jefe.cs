@@ -32,11 +32,11 @@ public class jefe : MonoBehaviour {
 
 
 		if(tiempo-tiempoGuardado>=1/BeatsPorSegundo){
-			print((int)tiempo);
+			
 			tiempoGuardado = tiempo;
 			GameObject dummy;
 
-			switch ((int)Random.Range (0.0f, 4.9f)) {
+			switch ((int)Random.Range (1.0f, 4.9f)) {
 			case 0:
 					dummy = Instantiate (bala, new Vector3 (this.transform.position.x, 9, this.transform.position.z), this.transform.rotation)as GameObject;
 					asignarColor (dummy);
@@ -83,6 +83,7 @@ public class jefe : MonoBehaviour {
 		case 0:
 			GetComponent<Renderer> ().material.color = Color.red;
 			dummy.gameObject.GetComponent<Renderer> ().material.color = Color.red;
+			dummy.gameObject.tag = "rojo";
 			duracion--;
 			if (duracion <= 0)
 				asignarLargo ();			
@@ -91,6 +92,7 @@ public class jefe : MonoBehaviour {
 		case 1:
 			GetComponent<Renderer>().material.color=Color.yellow;
 			dummy.gameObject.GetComponent<Renderer>().material.color=Color.yellow;
+			dummy.gameObject.tag = "amarillo";
 			duracion--;
 			if (duracion <= 0)
 				asignarLargo ();
@@ -100,6 +102,7 @@ public class jefe : MonoBehaviour {
 		case 2:
 			GetComponent<Renderer>().material.color=Color.green;
 			dummy.gameObject.GetComponent<Renderer>().material.color=Color.green;
+			dummy.gameObject.tag = "verde";
 			duracion--;
 			if (duracion <= 0)
 				asignarLargo ();
@@ -110,6 +113,7 @@ public class jefe : MonoBehaviour {
 			GetComponent<Renderer>().material.color=Color.blue;
 			dummy.gameObject.GetComponent<Renderer>().material.color=Color.blue;
 			duracion--;
+			dummy.gameObject.tag = "azul";
 			if (duracion <= 0)
 				asignarLargo ();
 			
