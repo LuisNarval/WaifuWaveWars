@@ -9,12 +9,20 @@ public class jefe : MonoBehaviour {
 	public float BeatsPorSegundo=1.0f;
 
 
+	public float minimoEsferas=2.0f;
+	public float maximoEsferas=6.9f;
+
 	float tiempo=0;
 	float tiempoGuardado=0;
 
+
+	int duracion;
+	int estadoColor;
+
+
 	// Use this for initialization
 	void Start () {
-
+		asignarLargo ();
 	}
 
 	// Update is called once per frame
@@ -62,37 +70,60 @@ public class jefe : MonoBehaviour {
 
 
 
+	void asignarLargo(){
+		estadoColor = (int)Random.Range (0.0f,3.9f);
+		duracion=(int)Random.Range (minimoEsferas,maximoEsferas);
+	}
+
 
 
 	void asignarColor(GameObject dummy){
-		switch ((int)Random.Range (0.0f, 3.9f)) {
+		switch (estadoColor) {
 
 		case 0:
-			this.gameObject.GetComponent<Renderer>().material.color=Color.red;
-			dummy.gameObject.GetComponent<Renderer>().material.color=Color.red;
+			GetComponent<Renderer> ().material.color = Color.red;
+			dummy.gameObject.GetComponent<Renderer> ().material.color = Color.red;
+			duracion--;
+			if (duracion <= 0)
+				asignarLargo ();			
 			break;
 
 		case 1:
-			this.gameObject.GetComponent<Renderer>().material.color=Color.yellow;
+			GetComponent<Renderer>().material.color=Color.yellow;
 			dummy.gameObject.GetComponent<Renderer>().material.color=Color.yellow;
+			duracion--;
+			if (duracion <= 0)
+				asignarLargo ();
+			
 			break;
 
 		case 2:
-			this.gameObject.GetComponent<Renderer>().material.color=Color.green;
+			GetComponent<Renderer>().material.color=Color.green;
 			dummy.gameObject.GetComponent<Renderer>().material.color=Color.green;
+			duracion--;
+			if (duracion <= 0)
+				asignarLargo ();
+			
 			break;
 
 		case 3:
-			this.gameObject.GetComponent<Renderer>().material.color=Color.blue;
+			GetComponent<Renderer>().material.color=Color.blue;
 			dummy.gameObject.GetComponent<Renderer>().material.color=Color.blue;
+			duracion--;
+			if (duracion <= 0)
+				asignarLargo ();
+			
 			break;
 
 		default:
 			print ("Algo salio terriblemente mal");
+			print (estadoColor);
+			asignarLargo ();
 			break;
 		}
-		Destroy (dummy,8.0f);
-	
+		Destroy (dummy,6.0f);
 	}
+
+
 
 }
