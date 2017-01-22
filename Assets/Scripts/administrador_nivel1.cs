@@ -45,7 +45,7 @@ public class administrador_nivel1 : MonoBehaviour {
 
 	public void enviarInformacion(string nombre, int balas, int muertes, int danioEnemigo){
 		int puntos;
-		puntos = ((balas + danioEnemigo) * 2) - muertes * 10;
+		puntos = ((balas + danioEnemigo/5) * 2) - muertes * 10;
 		switch (nombre) {
 
 		case "jugador1":

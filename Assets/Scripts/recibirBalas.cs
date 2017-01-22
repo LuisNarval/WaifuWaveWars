@@ -16,6 +16,7 @@ public class recibirBalas : MonoBehaviour {
 
 	public GameObject explosion;
 
+	public laser1 codigoLaser;
 
 	public bool respawnActivo = false;
 
@@ -24,7 +25,7 @@ public class recibirBalas : MonoBehaviour {
 
 	int vidasPerdidas=0;
 
-	int danioRealizado=0;
+	public int danioRealizado=0;
 
 
 	public administrador_nivel1 codigoAdministrador;
@@ -48,6 +49,7 @@ public class recibirBalas : MonoBehaviour {
 				Destroy (invasor.gameObject);
 				cantidadDeBalas++;
 				actualizarMarcador ();
+				codigoLaser.recogerBala ();
 				GetComponent<AudioSource> ().Play ();
 
 
