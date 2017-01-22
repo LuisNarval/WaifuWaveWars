@@ -39,6 +39,9 @@ public class estadisticas : MonoBehaviour {
 	public Text player4_historialTotal;
 
 
+
+	public string siguienteEscena;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -87,13 +90,27 @@ public class estadisticas : MonoBehaviour {
 	}
 
 
-	public void reiniciar(){
-		SceneManager.LoadScene ("Nivel1");
+
+
+
+
+
+	public void jugarDeNuevo(){
+		siguienteEscena="Nivel1";
+		this.GetComponent<Animator> ().SetTrigger ("desaparecerEstadisticas");
+	}
+
+	public void regresar(){
+		siguienteEscena="Menu";
+		this.GetComponent<Animator> ().SetTrigger ("desaparecerEstadisticas");
 	}
 
 
-	public void salir(){
-
+	public void irASiguienteEscena(){
+		SceneManager.LoadScene(siguienteEscena);
 	}
+
+
+
 
 }

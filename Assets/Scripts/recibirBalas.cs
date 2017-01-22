@@ -22,6 +22,13 @@ public class recibirBalas : MonoBehaviour {
 	public int vidas=3;
 	int cantidadDeBalas=0;
 
+	int vidasPerdidas=0;
+
+	int danioRealizado=0;
+
+
+	public administrador_nivel1 codigoAdministrador;
+
 	// Use this for initialization
 	void Start () {
 		actualizarVidas ();
@@ -51,14 +58,17 @@ public class recibirBalas : MonoBehaviour {
 				this.transform.position = new Vector3 (1000, this.transform.position.y, 200);
 
 				vidas--;
+				vidasPerdidas++;
 				actualizarVidas();
 
 			if (vidas >= 0) {
 				respawnActivo = true;
 				this.GetComponent<respawn> ().enabled = true;
 			} else if (vidas < 0) {
+				codigoAdministrador.enviarInformacion (this.gameObject.name,cantidadDeBalas, vidasPerdidas, danioRealizado);
 				Informacion.SetActive(false);
 				Calavera.SetActive(true);
+				codigoAdministrador.restarJugador ();
 				Destroy (this.gameObject);
 			}
 
