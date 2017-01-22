@@ -46,7 +46,10 @@ public class respawn : MonoBehaviour {
 				this.GetComponent<movimiento> ().estado = estadoOrigen;
 			else if (this.GetComponent<movimiento2> ()!=null)
 				this.GetComponent<movimiento2> ().estado = estadoOrigen;
-
+			else if (this.GetComponent<movimiento3> ()!=null)
+				this.GetComponent<movimiento3> ().estado = estadoOrigen;
+			else if (this.GetComponent<movimiento4> ()!=null)
+				this.GetComponent<movimiento4> ().estado = estadoOrigen;
 
 
 			inmunidad = true;

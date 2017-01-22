@@ -24,7 +24,7 @@ public class movimiento : MonoBehaviour {
 				this.transform.Translate (Vector3.left * Time.deltaTime * velocidad);		
 		}
 			
-		if (Input.GetKey (KeyCode.D)&&transform.localPosition.x<240) {
+		if (Input.GetKey (KeyCode.D)&&transform.localPosition.x<200) {
 			this.transform.Translate (Vector3.right * Time.deltaTime * velocidad);		
 		}
 

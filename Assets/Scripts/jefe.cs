@@ -19,6 +19,8 @@ public class jefe : MonoBehaviour {
 	int duracion;
 	int estadoColor;
 
+	public GameObject ojo;
+	public GameObject orbita;
 
 	// Use this for initialization
 	void Start () {
@@ -30,6 +32,7 @@ public class jefe : MonoBehaviour {
 
 		tiempo += Time.deltaTime;
 
+		orbita.transform.Rotate (0, 0, BeatsPorSegundo * Time.deltaTime * 10.0f);
 
 		if(tiempo-tiempoGuardado>=1/BeatsPorSegundo){
 			
@@ -81,7 +84,8 @@ public class jefe : MonoBehaviour {
 		switch (estadoColor) {
 
 		case 0:
-			GetComponent<Renderer> ().material.color = Color.red;
+			orbita.GetComponent<Renderer> ().material.color = Color.red;
+			ojo.GetComponent<Renderer> ().material.color = Color.red;
 			dummy.gameObject.GetComponent<Renderer> ().material.color = Color.red;
 			dummy.gameObject.tag = "rojo";
 			duracion--;
@@ -90,7 +94,8 @@ public class jefe : MonoBehaviour {
 			break;
 
 		case 1:
-			GetComponent<Renderer>().material.color=Color.yellow;
+			orbita.GetComponent<Renderer>().material.color=Color.yellow;
+			ojo.GetComponent<Renderer>().material.color=Color.yellow;
 			dummy.gameObject.GetComponent<Renderer>().material.color=Color.yellow;
 			dummy.gameObject.tag = "amarillo";
 			duracion--;
@@ -100,7 +105,8 @@ public class jefe : MonoBehaviour {
 			break;
 
 		case 2:
-			GetComponent<Renderer>().material.color=Color.green;
+			orbita.GetComponent<Renderer>().material.color=Color.green;
+			ojo.GetComponent<Renderer>().material.color=Color.green;
 			dummy.gameObject.GetComponent<Renderer>().material.color=Color.green;
 			dummy.gameObject.tag = "verde";
 			duracion--;
@@ -110,7 +116,8 @@ public class jefe : MonoBehaviour {
 			break;
 
 		case 3:
-			GetComponent<Renderer>().material.color=Color.blue;
+			orbita.GetComponent<Renderer>().material.color=Color.blue;
+			ojo.GetComponent<Renderer>().material.color=Color.blue;
 			dummy.gameObject.GetComponent<Renderer>().material.color=Color.blue;
 			duracion--;
 			dummy.gameObject.tag = "azul";

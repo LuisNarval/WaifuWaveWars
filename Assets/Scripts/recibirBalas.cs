@@ -11,17 +11,20 @@ public class recibirBalas : MonoBehaviour {
 	public Text marcador;
 	public Text marcadorVidas;
 
+	public GameObject Informacion;
+	public GameObject Calavera;
+
 	public GameObject explosion;
 
 
 	public bool respawnActivo = false;
 
-	int vidas=3;
+	public int vidas=3;
 	int cantidadDeBalas=0;
 
 	// Use this for initialization
 	void Start () {
-		
+		actualizarVidas ();
 	}
 	
 	// Update is called once per frame
@@ -38,6 +41,8 @@ public class recibirBalas : MonoBehaviour {
 				Destroy (invasor.gameObject);
 				cantidadDeBalas++;
 				actualizarMarcador ();
+				GetComponent<AudioSource> ().Play ();
+
 
 			} else if(invasor.gameObject.tag!="jugador"&&!respawnActivo) {
 				
@@ -47,8 +52,17 @@ public class recibirBalas : MonoBehaviour {
 
 				vidas--;
 				actualizarVidas();
+
+			if (vidas >= 0) {
 				respawnActivo = true;
 				this.GetComponent<respawn> ().enabled = true;
+			} else if (vidas < 0) {
+				Informacion.SetActive(false);
+				Calavera.SetActive(true);
+				Destroy (this.gameObject);
+			}
+
+
 		}
 				
 
