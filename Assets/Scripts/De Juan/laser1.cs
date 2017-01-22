@@ -4,6 +4,9 @@ using UnityEngine.UI;
 
 public class laser1 : MonoBehaviour {
 
+
+	public Text contador;
+
 	public GameObject explosion;
 
 	public recibirBalas codigoBalas;
@@ -13,11 +16,11 @@ public class laser1 : MonoBehaviour {
 	public AudioSource SFX_error;
 
 	public float balasNecesarias=10.0f;
-	float cantidadDeBalas = 0.0f;
+	public float cantidadDeBalas = 0.0f;
 
 
 	public bool puedeDisparar=false;
-
+	public GameObject trueno;
 
 	LineRenderer line;
 	// Use this for initialization
@@ -37,8 +40,10 @@ public class laser1 : MonoBehaviour {
 	public void recogerBala(){
 			cantidadDeBalas++;
 			barraDeBalas.fillAmount = cantidadDeBalas / 10.0f;
+			contador.text = cantidadDeBalas.ToString ();
 			if (cantidadDeBalas >= balasNecesarias) {
 				puedeDisparar = true;
+				trueno.SetActive (true);
 			}
 	}
 
@@ -46,8 +51,10 @@ public class laser1 : MonoBehaviour {
 	public void gastarBalas(){
 		cantidadDeBalas -= 2 * Time.deltaTime;
 		barraDeBalas.fillAmount = cantidadDeBalas / 10.0f;
+		contador.text = cantidadDeBalas.ToString ();
 		if (cantidadDeBalas <=0) {
 			puedeDisparar = false;
+			trueno.SetActive (false);
 		}
 	}
 
@@ -67,7 +74,7 @@ public class laser1 : MonoBehaviour {
 	{
 		line.enabled = true;
 
-		while (Input.GetKey(KeyCode.Space)) {
+		while (Input.GetKey(KeyCode.Space)||Input.GetKey(KeyCode.RightShift)||Input.GetKey(KeyCode.RightControl)||Input.GetKey(KeyCode.Return)||Input.GetKey(KeyCode.CapsLock)) {
 			//line.renderer = new Vector2 (0, Time.time);
 			this.GetComponent<AudioSource>().Play();
 			Ray ray = new Ray (transform.position, transform.forward);

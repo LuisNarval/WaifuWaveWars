@@ -7,6 +7,16 @@ public class jefe : MonoBehaviour {
 
 	public GameObject bala;
 
+	public AudioSource cancionRapida;
+	public AudioSource musica;
+	public GameObject explosion;
+
+
+	public administrador_nivel1 codigoAdmin;
+
+	public Animator animadorEstadisticas;
+
+
 	public float BeatsPorSegundo=1.0f;
 
 
@@ -34,6 +44,7 @@ public class jefe : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		asignarLargo ();
+
 	}
 
 	void fixedUpdate(){
@@ -167,21 +178,25 @@ public class jefe : MonoBehaviour {
 		switch (estadoColor) {
 
 			case 0:
+				
 				jugadorRojo.StopCoroutine ("FireLaser");
 				jugadorRojo.disparar ();
 			break;
 
 			case 1:
+			
 				jugadorAmarillo.StopCoroutine ("FireLaser");
 				jugadorAmarillo.disparar ();
 			break;
 
 			case 2:
+
 				jugadorVerde.StopCoroutine ("FireLaser");
 				jugadorVerde.disparar ();
 			break;
 
 			case 3:
+	
 				jugadorAzul.StopCoroutine ("FireLaser");
 				jugadorAzul.disparar ();
 			break;
@@ -195,11 +210,30 @@ public class jefe : MonoBehaviour {
 
 	public Image relleno;
 
+	bool segundaFase=false;
+
 	public void actualizarMarcador(){
+
+
+		if (vida <=1000.0f&&!segundaFase) {
+			BeatsPorSegundo = 2.5f;
+
+			musica.gameObject.SetActive (false);
+			cancionRapida.gameObject.SetActive (true);
+			segundaFase = true;
+		}
+
 
 		relleno.fillAmount = vida / 2500.0f;
 
 		print (vida);
+
+		if (vida <=0.0f) {
+			GameObject dummy=Instantiate (explosion,transform.position,transform.rotation)as GameObject;
+			dummy.transform.localScale = new Vector3 (10,10,10);
+			codigoAdmin.activarEstadisticas ();
+			Destroy (this.gameObject);
+		}
 
 	}
 
