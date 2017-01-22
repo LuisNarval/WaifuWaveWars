@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class administrador_nivel1 : MonoBehaviour {
 
@@ -9,6 +10,14 @@ public class administrador_nivel1 : MonoBehaviour {
 	public Animator animadorEstadisticas;
 
 	public estadisticas codigoEstadisticas;
+
+	public GameObject Ganador;
+
+
+	public Sprite jugador1;
+	public Sprite jugador2;
+	public Sprite jugador3;
+	public Sprite jugador4;
 
 	string siguienteEscena;
 
@@ -38,9 +47,39 @@ public class administrador_nivel1 : MonoBehaviour {
 	public void activarEstadisticas(){
 		animadorEstadisticas.SetTrigger ("aparecerEstadisticas");
 		codigoEstadisticas.actualizarEstadisticas ();
+		Ganador.GetComponent<Image> ().sprite = spriteGanador();
+	}
+
+	public Text tituloEstadisticas;
+	public GameObject cuerpoTitulo;
+
+	public void estadisticasGanadoras(){
+		
+		tituloEstadisticas.text="¡VICTORIA!";
+		cuerpoTitulo.GetComponent<Renderer> ().material.color = Color.green;
+
 	}
 
 
+	Sprite spriteGanador(){
+
+		Sprite[] arregloSprites = { jugador1, jugador2, jugador3, jugador4 };
+		int[] arregloValores = { PlayerPrefs.GetInt("player1_total"), PlayerPrefs.GetInt("player2_total"), PlayerPrefs.GetInt("player3_total"), PlayerPrefs.GetInt("player4_total") };
+			
+
+		Sprite ganador=jugador1;
+
+
+			for(int x=0;x<4   ;x++){
+				for(int y=0;y<3  ;y++){
+					if (arregloValores [y] > arregloValores [x]) {
+						ganador = arregloSprites [y];
+					}
+				}
+			}
+
+		return ganador;
+	}
 
 
 	public void enviarInformacion(string nombre, int balas, int muertes, int danioEnemigo){
